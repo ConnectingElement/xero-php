@@ -13,12 +13,13 @@ abstract class Application
 {
     protected static $_config_defaults = [
         'xero'  => [
-            'site'            => 'https://api.xero.com',
-            'base_url'        => 'https://api.xero.com',
-            'core_version'    => '2.0',
-            'payroll_version' => '1.0',
-            'file_version'    => '1.0',
-            'model_namespace' => '\\XeroPHP\\Models'
+            'site'              => 'https://api.xero.com',
+            'base_url'          => 'https://api.xero.com',
+            'core_version'      => '2.0',
+            'payroll_version'   => '1.0',
+            'file_version'      => '1.0',
+            'project_version'  => '1.0',
+            'model_namespace'   => '\\XeroPHP\\Models'
         ],
         //OAuth config
         'oauth' => [
