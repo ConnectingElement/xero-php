@@ -54,8 +54,12 @@ class Request
         }
 
         //Default to XML so you get the  xsi:type attribute in the root node.
-        $this->setHeader(self::HEADER_ACCEPT, self::CONTENT_TYPE_XML);
-
+        if($this->url->getApiType()==URL::API_PROJECT){
+            $this->setHeader(self::HEADER_ACCEPT, self::CONTENT_TYPE_JSON);
+        } else {
+            $this->setHeader(self::HEADER_ACCEPT, self::CONTENT_TYPE_XML);    
+        }
+        
         $xero_config = $this->app->getConfig('xero');
         if (isset($xero_config['unitdp'])) {
             $this->setParameter('unitdp', $xero_config['unitdp']);
@@ -105,6 +109,10 @@ class Request
             throw new Exception('Curl error: ' . curl_error($ch));
         }
 
+        if($this->url->getApiType()==URL::API_PROJECT){
+            return $response;
+        }
+        
         $this->response = new Response($this, $response, $info);
         $this->response->parse();
 

@@ -18,6 +18,7 @@ class URL
     const API_PAYROLL = 'payroll.xro';
     const API_FILE    = 'files.xro';
     const API_ASSET   = 'assets.xro';
+    const API_PROJECT   = 'projects.xro';
 
     const OAUTH_REQUEST_TOKEN = 'RequestToken';
     const OAUTH_ACCESS_TOKEN  = 'AccessToken';
@@ -84,13 +85,20 @@ class URL
             switch ($api) {
                 case self::API_CORE:
                     $version = $xero_config['core_version'];
+                    $this->apiType = self::API_CORE;
                     break;
                 case self::API_PAYROLL:
                     $version = $xero_config['payroll_version'];
+                    $this->apiType = self::API_PAYROLL;
                     break;
                 case self::API_FILE:
                     $version = $xero_config['file_version'];
+                    $this->apiType = self::API_FILE;
                     break;
+                case self::API_PROJECT:
+                    $version = $xero_config['project_version'];
+                    $this->apiType = self::API_PROJECT;
+                    break;                    
                 default:
                     throw new Exception('Invalid API passed to XeroPHP\URL::__construct(). Must be XeroPHP\URL::API_*');
             }
@@ -99,6 +107,9 @@ class URL
         }
     }
 
+    public function getApiType(){
+        return $this->apiType;
+    }
 
     public function isOAuth()
     {
